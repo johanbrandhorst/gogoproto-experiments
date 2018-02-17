@@ -1,0 +1,78 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Gofast",
+    "description": "Gofast defines some messages and services\nand is generated using protoc-gen-gofast.",
+    "version": "1.0"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/empty": {
+      "get": {
+        "summary": "Empty is a method with no input.",
+        "operationId": "Empty",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/gofastTestReply"
+            }
+          }
+        },
+        "tags": [
+          "TestService"
+        ]
+      }
+    },
+    "/api/v1/test": {
+      "get": {
+        "summary": "TestMethod is a simple unary method.",
+        "operationId": "TestMethod",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/gofastTestReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Id is the Id of the request.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TestService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "gofastTestReply": {
+      "type": "object",
+      "properties": {
+        "request_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RequestTime is the time of the request."
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Go Repository",
+    "url": "https://github.com/johanbrandhorst/gogoproto-experiments/gofast"
+  }
+}
