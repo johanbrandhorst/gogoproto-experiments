@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+// Gofast
+//
+// Gofast defines some messages and services
+// and is generated using protoc-gen-gofast.
+package gofast;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+  info: {
+    version: "1.0";
+  };
+  external_docs: {
+    url: "https://github.com/johanbrandhorst/gogoproto-experiments/gofast";
+    description: "Go Repository";
+  }
+  schemes: HTTPS;
+};
+
+// Correct import path
+option go_package = "github.com/johanbrandhorst/gogoproto-experiments/gofast/server";
+
+// TestService exposes some test methods
+service TestService {
+    // TestMethod is a simple unary method.
+    rpc TestMethod(TestRequest) returns (TestReply) {
+        option (google.api.http) = {
+            get: "/api/v1/test"
+        };
+    }
+    // Empty is a method with no input.
+    rpc Empty(google.protobuf.Empty) returns (TestReply) {
+        option (google.api.http) = {
+            get: "/api/v1/empty"
+        };
+    }
+}
+
+// TestRequest is a simple message
+message TestRequest {
+    // Id is the Id of the request.
+    string id = 1;
+}
+
+message TestReply {
+    // RequestTime is the time of the request.
+    google.protobuf.Timestamp request_time = 1;
+}
